@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo iw dev wlan0 scan | \grep '\sSSID:' | cut -c 8-
+
+# EOF

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+percent=$(cat /sys/firmware/picocalc/battery_percent)
+
+[[ ${percent} -gt 100 ]] && percent=$((percent-128))
+
+[[ -t 1 ]] && echo ${percent} || echo -n ${percent}
+
+# EOF

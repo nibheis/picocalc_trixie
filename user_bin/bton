@@ -1,0 +1,6 @@
+#!/bin/bash
+
+sudo rfkill unblock bluetooth
+rfkill list | \grep -i bluetooth -A 2
+
+# EOF

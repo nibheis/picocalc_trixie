@@ -154,7 +154,7 @@ static inline int kbd_read_i2c_2u8(struct i2c_client* i2c_client, uint8_t reg_ad
 // Shared global state for global interfaces such as sysfs
 struct kbd_ctx *g_ctx;
 
-void input_fw_read_fifo(struct kbd_ctx* ctx)
+inline void input_fw_read_fifo(struct kbd_ctx* ctx)
 {
 	uint8_t fifo_idx;
 	int rc;
@@ -220,95 +220,95 @@ static void key_report_event(struct kbd_ctx* ctx,
 		return;
 	}
 
-        /* right shift */
-        if (ev->scancode == 0xA3)
-        {
-            if (ev->state == KEY_STATE_PRESSED)
-            {
-                ctx->mouse_mode = !ctx->mouse_mode;
-            }
-            return;
-        }
-
-        if (ctx->mouse_mode)
-        {
-            switch(ev->scancode)
-            {
-            /* KEY_BACKSPACE */
-/*
-            case '\b':
-                  if (ev->state == KEY_STATE_PRESSED)
-                  {
-                      input_report_abs(ctx->input_dev, ABS_X, 0);
-                      input_report_abs(ctx->input_dev, ABS_Y, 0);
-                  } 
-                  return;
-*/
-            /* KEY_RIGHT */
-            case 0xb7:
-                  if (ev->state == KEY_STATE_PRESSED)
-                  {
-                      if (!(ctx->mouse_move_dir & MOUSE_MOVE_RIGHT))
-	                  ctx->last_keypress_at = ktime_get_boottime_ns();
-                      ctx->mouse_move_dir |= MOUSE_MOVE_RIGHT;
-                  }
-                  else if (ev->state == KEY_STATE_RELEASED)
-                  {
-                      ctx->mouse_move_dir &= ~MOUSE_MOVE_RIGHT;
-                  }
-                  return;
-            /* KEY_LEFT */
-            case 0xb4:
-                  if (ev->state == KEY_STATE_PRESSED)
-                  {
-                      if (!(ctx->mouse_move_dir & MOUSE_MOVE_LEFT))
-	                  ctx->last_keypress_at = ktime_get_boottime_ns();
-                      ctx->mouse_move_dir |= MOUSE_MOVE_LEFT;
-                  }
-                  else if (ev->state == KEY_STATE_RELEASED)
-                  {
-	              ctx->last_keypress_at = ktime_get_boottime_ns();
-                      ctx->mouse_move_dir &= ~MOUSE_MOVE_LEFT;
-                  }
-                  return;
-            /* KEY_DOWN */
-            case 0xb6:
-                  if (ev->state == KEY_STATE_PRESSED)
-                  {
-                      if (!(ctx->mouse_move_dir & MOUSE_MOVE_DOWN))
-	                  ctx->last_keypress_at = ktime_get_boottime_ns();
-                      ctx->mouse_move_dir |= MOUSE_MOVE_DOWN;
-                  }
-                  else if (ev->state == KEY_STATE_RELEASED)
-                  {
-                      ctx->mouse_move_dir &= ~MOUSE_MOVE_DOWN;
-                  }
-                  return;
-            /* KEY_UP */
-            case 0xb5:
-                  if (ev->state == KEY_STATE_PRESSED)
-                  {
-                      if (!(ctx->mouse_move_dir & MOUSE_MOVE_UP))
-	                  ctx->last_keypress_at = ktime_get_boottime_ns();
-                      ctx->mouse_move_dir |= MOUSE_MOVE_UP;
-                  }
-                  else if (ev->state == KEY_STATE_RELEASED)
-                  {
-                      ctx->mouse_move_dir &= ~MOUSE_MOVE_UP;
-                  }
-                  return;
-            /* KEY_RIGHTBRACE */
-            case ']':
-	          input_report_key(ctx->input_dev, BTN_LEFT, ev->state == KEY_STATE_PRESSED);
-                  return;
-            /* KEY_LEFTBRACE */
-            case '[':
-	          input_report_key(ctx->input_dev, BTN_RIGHT, ev->state == KEY_STATE_PRESSED);
-                  return;
-            default:
-                     break;
-            }
-        }
+//|        /* right shift */
+//|        if (ev->scancode == 0xA3)
+//|        {
+//|            if (ev->state == KEY_STATE_PRESSED)
+//|            {
+//|                ctx->mouse_mode = !ctx->mouse_mode;
+//|            }
+//|            return;
+//|        }
+//|
+//|        if (ctx->mouse_mode)
+//|        {
+//|            switch(ev->scancode)
+//|            {
+//|            /* KEY_BACKSPACE */
+//|/*
+//|            case '\b':
+//|                  if (ev->state == KEY_STATE_PRESSED)
+//|                  {
+//|                      input_report_abs(ctx->input_dev, ABS_X, 0);
+//|                      input_report_abs(ctx->input_dev, ABS_Y, 0);
+//|                  } 
+//|                  return;
+//|*/
+//|            /* KEY_RIGHT */
+//|            case 0xb7:
+//|                  if (ev->state == KEY_STATE_PRESSED)
+//|                  {
+//|                      if (!(ctx->mouse_move_dir & MOUSE_MOVE_RIGHT))
+//|	                  ctx->last_keypress_at = ktime_get_boottime_ns();
+//|                      ctx->mouse_move_dir |= MOUSE_MOVE_RIGHT;
+//|                  }
+//|                  else if (ev->state == KEY_STATE_RELEASED)
+//|                  {
+//|                      ctx->mouse_move_dir &= ~MOUSE_MOVE_RIGHT;
+//|                  }
+//|                  return;
+//|            /* KEY_LEFT */
+//|            case 0xb4:
+//|                  if (ev->state == KEY_STATE_PRESSED)
+//|                  {
+//|                      if (!(ctx->mouse_move_dir & MOUSE_MOVE_LEFT))
+//|	                  ctx->last_keypress_at = ktime_get_boottime_ns();
+//|                      ctx->mouse_move_dir |= MOUSE_MOVE_LEFT;
+//|                  }
+//|                  else if (ev->state == KEY_STATE_RELEASED)
+//|                  {
+//|	              ctx->last_keypress_at = ktime_get_boottime_ns();
+//|                      ctx->mouse_move_dir &= ~MOUSE_MOVE_LEFT;
+//|                  }
+//|                  return;
+//|            /* KEY_DOWN */
+//|            case 0xb6:
+//|                  if (ev->state == KEY_STATE_PRESSED)
+//|                  {
+//|                      if (!(ctx->mouse_move_dir & MOUSE_MOVE_DOWN))
+//|	                  ctx->last_keypress_at = ktime_get_boottime_ns();
+//|                      ctx->mouse_move_dir |= MOUSE_MOVE_DOWN;
+//|                  }
+//|                  else if (ev->state == KEY_STATE_RELEASED)
+//|                  {
+//|                      ctx->mouse_move_dir &= ~MOUSE_MOVE_DOWN;
+//|                  }
+//|                  return;
+//|            /* KEY_UP */
+//|            case 0xb5:
+//|                  if (ev->state == KEY_STATE_PRESSED)
+//|                  {
+//|                      if (!(ctx->mouse_move_dir & MOUSE_MOVE_UP))
+//|	                  ctx->last_keypress_at = ktime_get_boottime_ns();
+//|                      ctx->mouse_move_dir |= MOUSE_MOVE_UP;
+//|                  }
+//|                  else if (ev->state == KEY_STATE_RELEASED)
+//|                  {
+//|                      ctx->mouse_move_dir &= ~MOUSE_MOVE_UP;
+//|                  }
+//|                  return;
+//|            /* KEY_RIGHTBRACE */
+//|            case ']':
+//|	          input_report_key(ctx->input_dev, BTN_LEFT, ev->state == KEY_STATE_PRESSED);
+//|                  return;
+//|            /* KEY_LEFTBRACE */
+//|            case '[':
+//|	          input_report_key(ctx->input_dev, BTN_RIGHT, ev->state == KEY_STATE_PRESSED);
+//|                  return;
+//|            default:
+//|                     break;
+//|            }
+//|        }
 
 	// Post key scan event
 	input_event(ctx->input_dev, EV_MSC, MSC_SCAN, ev->scancode);
@@ -452,11 +452,13 @@ DEFINE_TIMER(g_kbd_timer,kbd_timer_function);
 static void kbd_timer_function(struct timer_list *data)
 {
     data = NULL;
+    struct timer_list *no_use = data;
+    data = no_use;
     schedule_work(&g_ctx->work_struct);
     mod_timer(&g_kbd_timer, jiffies + HZ / 128);
 }
 
-int input_probe(struct i2c_client* i2c_client)
+inline int input_probe(struct i2c_client* i2c_client)
 {
 	int rc, i;
 
@@ -574,7 +576,7 @@ int input_probe(struct i2c_client* i2c_client)
 	return 0;
 }
 
-void input_shutdown(struct i2c_client* i2c_client)
+inline void input_shutdown(struct i2c_client* i2c_client)
 {
 	// Run subsystem shutdowns
     /*
@@ -592,7 +594,7 @@ void input_shutdown(struct i2c_client* i2c_client)
 	g_ctx = NULL;
 }
 
-uint32_t params_get_sysfs_gid(void)
+inline uint32_t params_get_sysfs_gid(void)
 {
 	return sysfs_gid_setting;
 }
@@ -726,7 +728,7 @@ static struct kobj_type picocalc_ktype = {
 	.sysfs_ops = &kobj_sysfs_ops
 };
 
-int sysfs_probe(struct i2c_client* i2c_client)
+inline int sysfs_probe(struct i2c_client* i2c_client)
 {
 	int rc;
 
@@ -751,7 +753,7 @@ int sysfs_probe(struct i2c_client* i2c_client)
 	return 0;
 }
 
-void sysfs_shutdown(struct i2c_client* i2c_client)
+inline void sysfs_shutdown(struct i2c_client* i2c_client)
 {
 	// Remove sysfs entry
 	if (picocalc_kobj) {
