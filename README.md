@@ -19,8 +19,8 @@ You will need to connect to the Raspbery Pi Zero 2W using `ssh` until the setup 
 
 There are 2 ways to access your Raspberry Pi zero 2W:
 
-1. Use `ssh`. You'll get the IP address on your router.
-2. Connect the Pi to a monitor and use a Keyboard.
+1. Use `ssh`. You will get the IP address of your Pi by checking your router
+2. Connect the Pi to a monitor and a keyboard
 
 
 ## Step 3: Clone this repository
@@ -32,7 +32,7 @@ git clone https://github.com/nibheis/picocalc_trixie.git
 cd picocalc_trixie
 ```
 
-## Step 4:: Install display driver (panel_mipi_dbi)
+## Step 4: Install display driver (panel_mipi_dbi)
 
 1. Copy the firmware:
 ```
@@ -179,4 +179,50 @@ fi
 Make it executeable:
 ```
 chmod +x ~/bin/supply
+```
+
+## Some helper scripts
+In the directory `user_bin`, you will find some helper scripts that you might find useful:
+
+1. `battery` (see above)
+1. `btoff`: turn off bluetooth (with `rfkill`)
+1. `bton`: turn on bluetooth (with `rfkill`)
+1. `reboot`: reboot now
+1. `reset`: reset terminal and reload keyboard driver
+1. `scan`: print a list of visible SSIDs
+1. `shutdown`: shutdown not
+1. `supply` (see above)
+
+## Some useful packages
+
+### tools
+```
+vim
+screen
+bash-completion
+htop
+i2c-tools
+ncdu
+rsync
+```
+### web
+```
+w3m
+curl
+```
+### music
+```
+alsa-utils
+bluez
+bluez-alsa-utils
+bluez-firmware
+cmus
+id3v2
+yt-dlp
+```
+### python
+```
+python-is-python3
+python3-venv
+python3-dev
 ```
